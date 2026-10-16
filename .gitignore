@@ -3,7 +3,6 @@ __pycache__/
 venv/
 
 models/*.pt
-videos/*
 !videos/.gitkeep
 
 data/history.db
