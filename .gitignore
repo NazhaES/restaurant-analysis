@@ -1,0 +1,12 @@
+__pycache__/
+.venv/
+venv/
+
+models/*.pt
+videos/*
+!videos/.gitkeep
+
+data/history.db
+data/settings.json
+
+docs/*.mkv

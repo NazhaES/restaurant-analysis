@@ -1,0 +1,23 @@
+services:
+  restaurant-analysis:
+    build: .
+    user: "1000:1000"
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      YOLO_VERBOSE: "False"
+      YOLO_CONFIG_DIR: /tmp/Ultralytics
+    volumes:
+      - ./models:/app/models
+      - ./videos:/app/videos
+      - ./data:/app/data
+      - ./web:/app/web
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

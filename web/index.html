@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SeatSense</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="mark">SS</span>
+            <span>SeatSense</span>
+        </div>
+        <nav>
+            <a href="#live">Live floor</a>
+            <a href="#analytics">Analytics</a>
+            <a href="#history">History</a>
+            <a href="#settings">Settings</a>
+        </nav>
+    </aside>
+
+    <main>
+        <div class="top-status">
+            <span class="pill" id="status"><span class="dot"></span><span id="status-text">Live</span></span>
+            <span class="muted" id="running">Running: -</span>
+        </div>
+        <section class="page" id="page-live">
+            <header>
+                <div>
+                    <h1>Dining Room</h1>
+                    <p>CAM 01 &middot; <span class="video-name">-</span></p>
+                </div>
+            </header>
+
+            <div class="floor">
+                <section class="monitor">
+                    <div class="monitor-head">
+                        <h2>Dining Room Overview <span class="muted">&bull; <span class="video-name">-</span></span></h2>
+                    </div>
+                    <img id="video" src="/video" alt="Live dining room video">
+                    <div class="monitor-foot">
+                        <a class="small-button" href="/snapshot" download>Snapshot</a>
+                        <button class="small-button" id="restart">Restart video</button>
+                        <span class="muted push">On-device AI</span>
+                        <button class="icon-button" id="fullscreen" title="Full screen">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </section>
+
+                <div class="side">
+                    <section class="numbers">
+                        <div class="stat">
+                            <span class="label">Occupied tables</span>
+                            <b><span id="occupied">-</span> <small id="occupied-of"></small></b>
+                            <span class="sub" id="walk-ins">-</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Guests seated</span>
+                            <b><span id="guests">-</span> <small id="guests-of"></small></b>
+                            <span class="sub" id="capacity">-</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Seat utilization</span>
+                            <b class="accent" id="utilization">-</b>
+                            <span class="sub" id="free">-</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Avg seated time</span>
+                            <b id="avg-time">-</b>
+                            <span class="sub" id="longest">-</span>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Floor Plan <span class="muted" id="table-count"></span></h2>
+                            <div class="legend">
+                                <span><i class="key free"></i>Free</span>
+                                <span><i class="key busy"></i>Occupied</span>
+                                <span><i class="key taken"></i>Seat taken</span>
+                            </div>
+                        </div>
+                        <div class="plan" id="tables"></div>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-analytics">
+            <header>
+                <div>
+                    <h1>Analytics</h1>
+                    <p>The last 5 minutes, updated every second</p>
+                </div>
+            </header>
+
+            <div class="history">
+                <section class="panel">
+                    <div class="panel-head"><h2>Guests seated</h2><span class="muted">Last 5 min</span></div>
+                    <div class="chart-box"><svg class="chart" id="live-guests" viewBox="0 0 500 170"></svg></div>
+                </section>
+                <section class="panel">
+                    <div class="panel-head"><h2>Occupied tables</h2><span class="muted">Last 5 min</span></div>
+                    <div class="chart-box"><svg class="chart" id="live-tables" viewBox="0 0 500 170"></svg></div>
+                </section>
+            </div>
+
+            <section class="panel">
+                <div class="panel-head"><h2>Activity log</h2><span class="muted">Newest first</span></div>
+                <table class="grid">
+                    <thead><tr><th>Time</th><th>Table</th><th>Event</th><th>Guests</th></tr></thead>
+                    <tbody id="activity-body"></tbody>
+                </table>
+            </section>
+        </section>
+
+        <section class="page" id="page-history">
+            <header>
+                <div>
+                    <h1>History</h1>
+                    <p id="saved">Saved in the database: -</p>
+                </div>
+            </header>
+
+            <div class="history">
+                <div class="column">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Guests seated</h2>
+                            <div class="ranges" id="ranges">
+                                <button data-seconds="300" class="active">5 min</button>
+                                <button data-seconds="3600">1 hour</button>
+                                <button data-seconds="86400">24 hours</button>
+                                <button data-seconds="0">All</button>
+                            </div>
+                        </div>
+                        <div class="chart-box"><svg class="chart" id="history-guests" viewBox="0 0 500 170"></svg></div>
+                    </section>
+                    <section class="panel">
+                        <div class="panel-head"><h2>Occupied tables</h2><span class="muted" id="range-label">Last 5 min</span></div>
+                        <div class="chart-box"><svg class="chart" id="history-tables" viewBox="0 0 500 170"></svg></div>
+                    </section>
+                </div>
+
+                <div class="column">
+                    <section class="panel">
+                        <div class="panel-head"><h2>Tables</h2><span class="muted">All saved visits</span></div>
+                        <table class="grid">
+                            <thead><tr><th>Table</th><th>Visits</th><th>Avg time</th><th>Longest</th><th>Avg guests</th></tr></thead>
+                            <tbody id="tables-body"></tbody>
+                        </table>
+                    </section>
+                    <section class="panel">
+                        <div class="panel-head"><h2>Recent visits</h2><span class="muted">Newest first</span></div>
+                        <table class="grid">
+                            <thead><tr><th>Ended</th><th>Table</th><th>Guests</th><th>Seated for</th></tr></thead>
+                            <tbody id="recent-body"></tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-settings">
+            <header>
+                <div>
+                    <h1>Settings</h1>
+                    <p>Changes apply to the live video as soon as you save</p>
+                </div>
+            </header>
+
+            <form class="history" id="settings-form">
+                <section class="panel">
+                    <span class="group">Video</span>
+                    <label class="field">
+                        <span>Video source</span>
+                        <select name="video" id="video-select"></select>
+                        <small>Files in the videos folder and the project folder. The video restarts when you change it.</small>
+                    </label>
+                    <label class="field">
+                        <span>Stream quality</span>
+                        <div class="unit"><input type="number" name="jpeg_quality" min="30" max="95" step="5"> %</div>
+                        <small>Lower is faster over Wi-Fi but blurrier. 30 to 95.</small>
+                    </label>
+                </section>
+
+                <section class="panel">
+                    <span class="group">Table occupancy</span>
+                    <label class="field">
+                        <span>Time before a table counts as occupied</span>
+                        <div class="unit"><input type="number" name="occupy_seconds" min="0" max="60" step="0.5"> sec</div>
+                        <small>Stops a table switching to occupied for someone who only pauses there.</small>
+                    </label>
+                    <label class="field">
+                        <span>Time before a table counts as free again</span>
+                        <div class="unit"><input type="number" name="free_seconds" min="0" max="60" step="0.5"> sec</div>
+                        <small>Stops a table flickering to free when a guest is missed for a moment.</small>
+                    </label>
+                </section>
+
+                <section class="panel">
+                    <span class="group">Guest count</span>
+                    <label class="field">
+                        <span>Time to accept a higher count</span>
+                        <div class="unit"><input type="number" name="up_seconds" min="0" max="60" step="0.5"> sec</div>
+                        <small>A higher count must be the most common one over this time.</small>
+                    </label>
+                    <label class="field">
+                        <span>Time to accept a lower count</span>
+                        <div class="unit"><input type="number" name="down_seconds" min="1" max="120" step="1"> sec</div>
+                        <small>Every frame over this time must be lower before a guest is removed.</small>
+                    </label>
+                    <label class="field">
+                        <span>Seats per table</span>
+                        <div class="unit"><input type="number" name="seats_per_table" min="1" max="12" step="1"> seats</div>
+                        <small>The most guests one table can have.</small>
+                    </label>
+                </section>
+
+                <section class="panel">
+                    <span class="group">Detection</span>
+                    <label class="field">
+                        <span>People detection confidence</span>
+                        <div class="unit"><input type="number" name="confidence" min="0.05" max="0.95" step="0.05"></div>
+                        <small>Lower finds more partly hidden guests but risks false ones.</small>
+                    </label>
+                    <label class="field">
+                        <span>Standing check confidence</span>
+                        <div class="unit"><input type="number" name="pose_confidence" min="0.05" max="0.95" step="0.05"></div>
+                        <small>How sure the pose model must be before it can mark someone as standing.</small>
+                    </label>
+                </section>
+            </form>
+
+            <section class="panel save-row">
+                <button class="primary" id="save">Save changes</button>
+                <button class="small-button" id="reset">Reset to defaults</button>
+                <span class="muted" id="saved-note"></span>
+            </section>
+        </section>
+    </main>
+
+    <div class="tooltip" id="tooltip"></div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
