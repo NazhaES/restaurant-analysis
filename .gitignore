@@ -8,5 +8,3 @@ videos/*
 
 data/history.db
 data/settings.json
-
-docs/*.mkv
