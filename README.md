@@ -14,11 +14,24 @@ guests are at it and for how long. Every visit is saved to a database for the hi
 
 Everything runs on your own computer. No video leaves the machine.
 
-## Demo
+## Screenshots
 
-![Demo](docs/2026-10-16-17-23-27.gif)
+**Live floor**: tables turn red when occupied, with the guest count and seated time.
+The floor plan shows which seats are taken.
 
-[Watch the full-quality video](docs/2026-10-16-17-23-27.gif)
+![Live floor](docs/live-floor.png)
+
+**Analytics**: guests and occupied tables over the last 5 minutes, plus every arrival and departure.
+
+![Analytics](docs/analytics.png)
+
+**History**: saved visits for each table, with the average and longest seated time.
+
+![History](docs/history.png)
+
+**Settings**: pick the video and tune the detection, applied without a restart.
+
+![Settings](docs/settings.png)
 
 ## Run with Docker
 
