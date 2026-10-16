@@ -14,6 +14,10 @@ guests are at it and for how long. Every visit is saved to a database for the hi
 
 Everything runs on your own computer. No video leaves the machine.
 
+## Demo video
+
+[Download the full demo video (MKV, 1 min)](docs/demo.mkv)
+
 ## Screenshots
 
 **Live floor**: tables turn red when occupied, with the guest count and seated time.
