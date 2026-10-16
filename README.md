@@ -16,9 +16,9 @@ Everything runs on your own computer. No video leaves the machine.
 
 ## Demo
 
-![Demo](docs/demo.gif)
+![Demo](docs/2026-10-16-17-23-27.gif)
 
-[Watch the full-quality video](docs/demo.mp4)
+[Watch the full-quality video](docs/2026-10-16-17-23-27.gif)
 
 ## Run with Docker
 
