@@ -16,7 +16,7 @@ Everything runs on your own computer. No video leaves the machine.
 
 ## Demo video
 
-[Download the full demo video (MKV, 1 min)](docs/demo.mkv)
+[Watch the demo video](docs/demo.mkv)
 
 ## Screenshots
 
