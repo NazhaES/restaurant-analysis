@@ -16,7 +16,7 @@ Everything runs on your own computer. No video leaves the machine.
 
 ## Demo video
 
-[Watch the demo video](docs/demo.mkv)
+[Watch the demo video](docs/seatsense-demo.mp4)
 
 ## Screenshots
 
