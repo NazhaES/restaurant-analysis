@@ -7,3 +7,4 @@ models/*.pt
 
 data/history.db
 data/settings.json
+*.mkv
